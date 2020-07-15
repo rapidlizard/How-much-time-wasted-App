@@ -40,7 +40,7 @@
           :background="donutSettings.background"
           :thickness="donutSettings.thickness"
           :size="donutSettings.size"
-          :total="user.total_hours + user.csgo_stats.hours / 60 / 24"
+          :total="user.total_hours"
         >
           <div>
             <h4>Hours:</h4>
@@ -139,7 +139,10 @@ export default {
       ];
       this.hoursValues = [
         { value: user.csgo_stats.hours / 60 / 24, color: "#D2A83A" },
-        { value: user.total_hours, color: "#4F5E74" },
+        {
+          value: user.total_hours - user.csgo_stats.hours / 60 / 24,
+          color: "#4F5E74",
+        },
       ];
     },
   },
