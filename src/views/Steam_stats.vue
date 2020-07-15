@@ -10,7 +10,9 @@
 
     <section class="results">
       <div>
-        <h3>You have wasted {{ user.total_hours }} hours</h3>
+        <h3>
+          You have wasted <span>{{ user.total_hours }}</span> hours
+        </h3>
         <p>Thats {{ user.total_hours / 24 }} days!</p>
       </div>
       <div>
@@ -170,9 +172,8 @@ export default {
       margin-right: 10px;
     }
     .user-info {
-      display: flex;
       align-items: baseline;
-      margin-top: 65px;
+      margin-top: 40px;
       font-weight: 500;
       line-height: 26px;
       letter-spacing: 0.05em;
@@ -181,7 +182,6 @@ export default {
       a {
         font-size: 36px;
         color: #a4bdfe;
-        margin-right: 10px;
       }
       p {
         font-size: 18px;
@@ -193,7 +193,14 @@ export default {
     text-align: center;
     margin-bottom: 80px;
     h2 {
+      margin-bottom: 10px;
       color: #73d0ee;
+    }
+    h3 {
+      margin-bottom: 10px;
+      span {
+        color: #d76bd9;
+      }
     }
     div {
       margin-bottom: 60px;
