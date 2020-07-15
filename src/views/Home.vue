@@ -7,6 +7,14 @@
         <button @click="go_to_user_steam_stats()">GO!</button>
       </div>
     </div>
+    <div class="site-description">
+      <h3>What does this do?</h3>
+      <p>
+        This is a simple app to get you depressed by showing you how much time
+        you wasted on steam and csgo. It also show some of your csgo stats if
+        your into that kind of stuff.
+      </p>
+    </div>
   </div>
 </template>
 
@@ -70,6 +78,13 @@ export default {
       border: none;
       border-radius: 10px 10px 0px 10px;
     }
+  }
+}
+.site-description {
+  padding-top: 200px;
+  text-align: center;
+  h3 {
+    margin-bottom: 10px;
   }
 }
 </style>
