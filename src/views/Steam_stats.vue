@@ -24,7 +24,7 @@
 
       <div class="main-stats">
         <vc-donut
-          :sections="accSections"
+          :sections="accuracyValues"
           :background="donutSettings.background"
           :thickness="donutSettings.thickness"
           :size="donutSettings.size"
@@ -36,7 +36,7 @@
           </div>
         </vc-donut>
         <vc-donut
-          :sections="hoursSections"
+          :sections="hoursValues"
           :background="donutSettings.background"
           :thickness="donutSettings.thickness"
           :size="donutSettings.size"
@@ -51,7 +51,7 @@
         </vc-donut>
 
         <vc-donut
-          :sections="kdSections"
+          :sections="kdRatioValues"
           :background="donutSettings.background"
           :thickness="donutSettings.thickness"
           :size="donutSettings.size"
@@ -62,6 +62,37 @@
             <span class="kd-ratio">{{ user.csgo_stats.kd_ratio }}</span>
           </div>
         </vc-donut>
+      </div>
+
+      <div class="minor-stats">
+        <div class="row">
+          <div class="stat">
+            <h3>MVPs</h3>
+            <span>{{ user.csgo_stats.mvps }}</span>
+          </div>
+          <div class="stat">
+            <h3>Money earned</h3>
+            <span>{{ user.csgo_stats.money_earned }}</span>
+          </div>
+          <div class="stat">
+            <h3>Knife Kills</h3>
+            <span>{{ user.csgo_stats.knife_kills }}</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="stat">
+            <h3>Planted Bombs</h3>
+            <span>{{ user.csgo_stats.planted_bombs }}</span>
+          </div>
+          <div class="stat">
+            <h3>Rounds won</h3>
+            <span>{{ user.csgo_stats.total_wins }}</span>
+          </div>
+          <div class="stat">
+            <h3>Defused Bombs</h3>
+            <span>{{ user.csgo_stats.defused_bombs }}</span>
+          </div>
+        </div>
       </div>
     </section>
   </div>
@@ -79,10 +110,9 @@ export default {
         size: 200,
       },
       user: {},
-      kdSections: [],
-      accSections: [],
-      hoursSections: [],
-      sections: [{ value: 50 }, { value: 50 }],
+      kdRatioValues: [],
+      accuracyValues: [],
+      hoursValues: [],
     };
   },
   methods: {
@@ -94,20 +124,20 @@ export default {
         )
         .then((response) => {
           this.loading = false;
-          this.set_sections(response.data);
+          this.set_donut_charts_values(response.data);
           this.user = response.data;
         });
     },
-    set_sections(user) {
-      this.kdSections = [
+    set_donut_charts_values(user) {
+      this.kdRatioValues = [
         { value: user.csgo_stats.total_deaths, color: "#7DD23A" },
         { value: user.csgo_stats.total_kills, color: "#4F5E74" },
       ];
-      this.accSections = [
+      this.accuracyValues = [
         { value: user.csgo_stats.shots_hit, color: "#D64C4C" },
         { value: user.csgo_stats.shots_fired, color: "#4F5E74" },
       ];
-      this.hoursSections = [
+      this.hoursValues = [
         { value: user.csgo_stats.hours / 60 / 24, color: "#D2A83A" },
         { value: user.total_hours, color: "#4F5E74" },
       ];
@@ -125,7 +155,7 @@ export default {
     margin-bottom: 60px;
     a {
       font-weight: 500;
-      font-size: 18px;
+      font-size: 24px;
       line-height: 26px;
       letter-spacing: 0.05em;
       color: #a4bdfe;
@@ -138,7 +168,7 @@ export default {
   }
   .results {
     text-align: center;
-
+    margin-bottom: 100px;
     div {
       margin-bottom: 60px;
     }
@@ -148,13 +178,17 @@ export default {
     margin-bottom: 50px;
     h2 {
       text-align: center;
-      margin-bottom: 100px;
+      margin-bottom: 50px;
     }
     .main-stats {
       display: flex;
       justify-content: space-between;
+      margin-bottom: 50px;
       div {
         text-align: center;
+        h4 {
+          text-align: center;
+        }
         span {
           font-weight: 600;
           font-size: 24px;
@@ -168,6 +202,23 @@ export default {
       }
       .kd-ratio {
         color: #7dd23a;
+      }
+    }
+    .minor-stats {
+      .row {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 50px;
+        .stat {
+          width: 200px;
+          text-align: center;
+          h3 {
+            color: #78e5b1;
+          }
+          span {
+            color: #a4bdfe;
+          }
+        }
       }
     }
   }

@@ -67,7 +67,6 @@ h4 {
   font-weight: 300;
   font-size: 18px;
   line-height: 21px;
-  text-align: center;
   color: #a4bdfe;
 }
 
