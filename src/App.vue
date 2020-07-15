@@ -36,7 +36,7 @@ h1 {
   text-align: center;
   font-style: normal;
   font-weight: bold;
-  font-size: calc(28px + 0.5vw);
+  font-size: calc(38px + 0.5vw);
   letter-spacing: 0.1em;
   color: #a3ffd3;
   text-shadow: 0px 0px 10px #78e5b1;
@@ -59,7 +59,7 @@ h3 {
   font-size: 24px;
   line-height: 28px;
   letter-spacing: 0.05em;
-  color: #da5bdd;
+  color: #78e5b1;
 }
 
 h4 {

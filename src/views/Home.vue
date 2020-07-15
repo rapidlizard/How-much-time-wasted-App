@@ -2,7 +2,7 @@
   <div class="home">
     <div class="steamid-form">
       <label>Enter your steam id:</label>
-      <div>
+      <div class="input-bar">
         <input type="text" v-model="steamid" />
         <button @click="go_to_user_steam_stats()">GO!</button>
       </div>
@@ -29,6 +29,9 @@ export default {
 </script>
 <style lang="scss">
 .steamid-form {
+  display: block;
+  width: 370px;
+  margin: 0 auto;
   padding-top: 150px;
   label {
     display: block;
@@ -39,32 +42,34 @@ export default {
     color: #78e5b1;
     margin-bottom: 10px;
   }
-
-  input {
-    padding: 0 10px;
-    height: 40px;
-    width: 350px;
-    font-family: "Raleway", sans-serif;
-    font-size: 18px;
-    color: #a4bdfe;
-    background: #171c24;
-    border: 3px solid #78e5b1;
-    border-radius: 0px 10px 10px 10px;
-
-    &:focus {
-      outline: none;
-    }
-  }
-  button {
+  .input-bar {
     position: relative;
-    right: 20px;
-    width: 45px;
-    height: 40px;
-    font-family: "Raleway", sans-serif;
-    font-size: 18px;
-    background: #78e5b1;
-    border: none;
-    border-radius: 10px 10px 0px 10px;
+    input {
+      padding: 0 10px;
+      height: 40px;
+      width: 350px;
+      font-family: "Raleway", sans-serif;
+      font-size: 18px;
+      color: #a4bdfe;
+      background: #171c24;
+      border: 3px solid #78e5b1;
+      border-radius: 0px 10px 10px 10px;
+
+      &:focus {
+        outline: none;
+      }
+    }
+    button {
+      position: absolute;
+      right: 20px;
+      width: 45px;
+      height: 40px;
+      font-family: "Raleway", sans-serif;
+      font-size: 18px;
+      background: #78e5b1;
+      border: none;
+      border-radius: 10px 10px 0px 10px;
+    }
   }
 }
 </style>

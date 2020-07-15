@@ -172,6 +172,9 @@ export default {
   .results {
     text-align: center;
     margin-bottom: 100px;
+    h2 {
+      color: #d2a83a;
+    }
     div {
       margin-bottom: 60px;
     }
@@ -215,9 +218,6 @@ export default {
         .stat {
           width: 200px;
           text-align: center;
-          h3 {
-            color: #78e5b1;
-          }
           span {
             color: #a4bdfe;
           }
