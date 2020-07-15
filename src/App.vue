@@ -63,6 +63,7 @@ h3 {
 }
 
 h4 {
+  margin: 0;
   font-weight: 300;
   font-size: 18px;
   line-height: 21px;

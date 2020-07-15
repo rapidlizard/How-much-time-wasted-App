@@ -24,10 +24,11 @@
 
       <div class="main-stats">
         <vc-donut
-          :sections="sections"
+          :sections="accSections"
           :background="donutSettings.background"
           :thickness="donutSettings.thickness"
           :size="donutSettings.size"
+          :total="user.csgo_stats.shots_fired + user.csgo_stats.shots_hit"
         >
           <div>
             <h4>Accuracy:</h4>
@@ -35,10 +36,11 @@
           </div>
         </vc-donut>
         <vc-donut
-          :sections="sections"
+          :sections="hoursSections"
           :background="donutSettings.background"
           :thickness="donutSettings.thickness"
           :size="donutSettings.size"
+          :total="user.total_hours + user.csgo_stats.hours / 60 / 24"
         >
           <div>
             <h4>Hours:</h4>
@@ -76,8 +78,10 @@ export default {
         thickness: 10,
         size: 200,
       },
-      accSections: [{}],
-      hoursSections: [{}],
+      user: {},
+      kdSections: [],
+      accSections: [],
+      hoursSections: [],
       sections: [{ value: 50 }, { value: 50 }],
     };
   },
@@ -96,8 +100,16 @@ export default {
     },
     set_sections(user) {
       this.kdSections = [
-        { value: user.csgo_stats.total_deaths },
-        { value: user.csgo_stats.total_kills },
+        { value: user.csgo_stats.total_deaths, color: "#7DD23A" },
+        { value: user.csgo_stats.total_kills, color: "#4F5E74" },
+      ];
+      this.accSections = [
+        { value: user.csgo_stats.shots_hit, color: "#D64C4C" },
+        { value: user.csgo_stats.shots_fired, color: "#4F5E74" },
+      ];
+      this.hoursSections = [
+        { value: user.csgo_stats.hours / 60 / 24, color: "#D2A83A" },
+        { value: user.total_hours, color: "#4F5E74" },
       ];
     },
   },
@@ -133,6 +145,7 @@ export default {
   }
   .csgo-stats {
     padding-top: 20px;
+    margin-bottom: 50px;
     h2 {
       text-align: center;
       margin-bottom: 100px;
@@ -143,6 +156,7 @@ export default {
       div {
         text-align: center;
         span {
+          font-weight: 600;
           font-size: 24px;
         }
       }
