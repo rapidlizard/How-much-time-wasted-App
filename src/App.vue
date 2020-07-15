@@ -37,7 +37,6 @@ h1 {
   font-style: normal;
   font-weight: bold;
   font-size: calc(38px + 0.5vw);
-  letter-spacing: 0.1em;
   color: #a3ffd3;
   text-shadow: 0px 0px 10px #78e5b1;
 }

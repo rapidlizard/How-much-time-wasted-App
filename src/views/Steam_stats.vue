@@ -1,8 +1,11 @@
 <template>
   <div class="steam-stats" v-if="!loading">
-    <section class="header">
+    <section class="user">
       <img :src="user.img" alt="" />
-      <a :href="user.url">{{ user.name }}</a>
+      <div class="user-info">
+        <a :href="user.url">{{ user.name }}</a>
+        <p>{{ moment(user.created * 1000).toNow(true) }} old</p>
+      </div>
     </section>
 
     <section class="results">
@@ -15,7 +18,8 @@
         <p>{{ user.rating.description }}</p>
       </div>
       <div>
-        <h3>Your score: {{ user.score }}</h3>
+        <h3>Your Score</h3>
+        <p>{{ user.score }}</p>
       </div>
     </section>
 
@@ -72,7 +76,7 @@
           </div>
           <div class="stat">
             <h3>Money earned</h3>
-            <span>{{ user.csgo_stats.money_earned }}</span>
+            <span>${{ user.csgo_stats.money_earned }}</span>
           </div>
           <div class="stat">
             <h3>Knife Kills</h3>
@@ -154,26 +158,42 @@ export default {
 <style lang="scss">
 .steam-stats {
   padding-top: 80px;
-  .header {
+  .user {
+    display: flex;
+    justify-content: center;
     margin-bottom: 60px;
-    a {
-      font-weight: 500;
-      font-size: 24px;
-      line-height: 26px;
-      letter-spacing: 0.05em;
-      color: #a4bdfe;
-    }
+
     img {
       width: 100px;
       height: 100px;
       border-radius: 50px 50px 10px 50px;
+      margin-right: 10px;
+    }
+    .user-info {
+      display: flex;
+      align-items: baseline;
+      margin-top: 65px;
+      font-weight: 500;
+      line-height: 26px;
+      letter-spacing: 0.05em;
+      color: #a4bdfe;
+
+      a {
+        font-size: 36px;
+        color: #a4bdfe;
+        margin-right: 10px;
+      }
+      p {
+        font-size: 18px;
+        color: #a4bdfe;
+      }
     }
   }
   .results {
     text-align: center;
-    margin-bottom: 100px;
+    margin-bottom: 80px;
     h2 {
-      color: #d2a83a;
+      color: #73d0ee;
     }
     div {
       margin-bottom: 60px;
@@ -218,6 +238,9 @@ export default {
         .stat {
           width: 200px;
           text-align: center;
+          h3 {
+            margin-bottom: 10px;
+          }
           span {
             color: #a4bdfe;
           }
