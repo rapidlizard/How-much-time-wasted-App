@@ -13,7 +13,6 @@ body {
   margin: 0;
   padding: 0;
   font-family: "Raleway", sans-serif;
-  overflow-x: hidden;
   background-color: #171c24;
 }
 
@@ -28,17 +27,16 @@ html {
 }
 
 #app {
-  width: 800px;
+  max-width: 800px;
   margin: 0 auto;
 }
 
 h1 {
-  margin: 40px 0 0 0;
+  padding-top: 40px;
   text-align: center;
   font-style: normal;
   font-weight: bold;
-  font-size: 48px;
-  line-height: 56px;
+  font-size: calc(28px + 0.5vw);
   letter-spacing: 0.1em;
   color: #a3ffd3;
   text-shadow: 0px 0px 10px #78e5b1;

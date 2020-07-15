@@ -1,5 +1,5 @@
 <template>
-  <div class="steam-stats">
+  <div class="steam-stats" v-if="!loading">
     <section class="header">
       <img :src="user.img" alt="" />
       <a :href="user.url">{{ user.name }}</a>
@@ -23,28 +23,62 @@
       <h2>Your CSGO stats</h2>
 
       <div class="main-stats">
-        <div>
-          <h4>Accuracy:</h4>
-          <span class="accuracy">{{ user.csgo_stats.accuracy }}</span>
-        </div>
-        <div>
-          <h4>Hours:</h4>
-          <span class="hours">{{ user.csgo_stats.hours / 60 / 24 }}</span>
-        </div>
-        <div>
-          <h4>KD Ratio:</h4>
-          <span class="kd-ratio">{{ user.csgo_stats.kd_ratio }}</span>
-        </div>
+        <vc-donut
+          :sections="sections"
+          :background="donutSettings.background"
+          :thickness="donutSettings.thickness"
+          :size="donutSettings.size"
+        >
+          <div>
+            <h4>Accuracy:</h4>
+            <span class="accuracy">{{ user.csgo_stats.accuracy }}</span>
+          </div>
+        </vc-donut>
+        <vc-donut
+          :sections="sections"
+          :background="donutSettings.background"
+          :thickness="donutSettings.thickness"
+          :size="donutSettings.size"
+        >
+          <div>
+            <h4>Hours:</h4>
+            <span class="hours">{{
+              (user.csgo_stats.hours / 60 / 24).toFixed()
+            }}</span>
+          </div>
+        </vc-donut>
+
+        <vc-donut
+          :sections="kdSections"
+          :background="donutSettings.background"
+          :thickness="donutSettings.thickness"
+          :size="donutSettings.size"
+          :total="user.csgo_stats.total_kills + user.csgo_stats.total_deaths"
+        >
+          <div>
+            <h4>KD Ratio:</h4>
+            <span class="kd-ratio">{{ user.csgo_stats.kd_ratio }}</span>
+          </div>
+        </vc-donut>
       </div>
     </section>
   </div>
 </template>
 <script>
 import axios from "axios";
+
 export default {
   data() {
     return {
-      user: {},
+      loading: true,
+      donutSettings: {
+        background: "#171c24",
+        thickness: 10,
+        size: 200,
+      },
+      accSections: [{}],
+      hoursSections: [{}],
+      sections: [{ value: 50 }, { value: 50 }],
     };
   },
   methods: {
@@ -55,8 +89,16 @@ export default {
             this.$route.params.steamid
         )
         .then((response) => {
+          this.loading = false;
+          this.set_sections(response.data);
           this.user = response.data;
         });
+    },
+    set_sections(user) {
+      this.kdSections = [
+        { value: user.csgo_stats.total_deaths },
+        { value: user.csgo_stats.total_kills },
+      ];
     },
   },
   mounted() {
@@ -99,20 +141,19 @@ export default {
       display: flex;
       justify-content: space-between;
       div {
-        width: 200px;
         text-align: center;
         span {
           font-size: 24px;
         }
-        .accuracy {
-          color: #d64c4c;
-        }
-        .hours {
-          color: #d2a83a;
-        }
-        .kd-ratio {
-          color: #7dd23a;
-        }
+      }
+      .accuracy {
+        color: #d64c4c;
+      }
+      .hours {
+        color: #d2a83a;
+      }
+      .kd-ratio {
+        color: #7dd23a;
       }
     }
   }
