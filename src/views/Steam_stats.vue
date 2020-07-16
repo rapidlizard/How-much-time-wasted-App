@@ -59,13 +59,11 @@
             :background="donutSettings.background"
             :thickness="donutSettings.thickness"
             :size="donutSettings.size"
-            :total="user.total_hours"
+            :total="user.csgo_stats.total_kills"
           >
             <div>
-              <h4>Hours:</h4>
-              <span class="hours">{{
-                (user.csgo_stats.hours / 60 / 24).toFixed()
-              }}</span>
+              <h4>Headshots:</h4>
+              <span class="hours">{{ user.csgo_stats.headshots }}</span>
             </div>
           </vc-donut>
 
@@ -175,17 +173,17 @@ export default {
     },
     set_donut_charts_values(user) {
       this.kdRatioValues = [
-        { value: user.csgo_stats.total_deaths, color: "#7DD23A" },
-        { value: user.csgo_stats.total_kills, color: "#4F5E74" },
+        { value: user.csgo_stats.total_kills, color: "#7DD23A" },
+        { value: user.csgo_stats.total_deaths, color: "#4F5E74" },
       ];
       this.accuracyValues = [
         { value: user.csgo_stats.shots_hit, color: "#D64C4C" },
         { value: user.csgo_stats.shots_fired, color: "#4F5E74" },
       ];
       this.hoursValues = [
-        { value: user.csgo_stats.hours / 60 / 24, color: "#D2A83A" },
+        { value: user.csgo_stats.headshots, color: "#D2A83A" },
         {
-          value: user.total_hours - user.csgo_stats.hours / 60 / 24,
+          value: user.csgo_stats.total_kills - user.csgo_stats.headshots,
           color: "#4F5E74",
         },
       ];
