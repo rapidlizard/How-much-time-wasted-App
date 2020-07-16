@@ -1,123 +1,140 @@
 <template>
-  <div class="steam-stats">
-    <section class="user">
-      <img :src="user.img" alt="" />
-      <div class="user-info">
-        <a :href="user.url">{{ user.name }}</a>
-        <p>Joined steam in {{ moment(user.created * 1000).format("Y") }}</p>
-      </div>
-    </section>
+  <div>
+    <div v-if="failed" class="failed">
+      <h2>404</h2>
+      <h3>This user was not found :(</h3>
+    </div>
+    <div v-if="loading" class="loader">
+      <sync-loader
+        :loading="loading"
+        color="#78e5b1"
+        size="20px"
+        class="loader"
+      ></sync-loader>
+    </div>
+    <div class="steam-stats" v-if="!loading && !failed">
+      <section class="user">
+        <img :src="user.img" alt="" />
+        <div class="user-info">
+          <a :href="user.url">{{ user.name }}</a>
+          <p>Joined steam in {{ moment(user.created * 1000).format("Y") }}</p>
+        </div>
+      </section>
 
-    <section class="results">
-      <div>
-        <h3>
-          You have wasted <span>{{ user.total_hours }}</span> hours
-        </h3>
-        <p>Thats {{ user.total_hours / 24 }} days!</p>
-      </div>
-      <div>
-        <h2>{{ user.rating.title }}</h2>
-        <p>{{ user.rating.description }}</p>
-      </div>
-      <div>
-        <h3>Your Score</h3>
-        <p>{{ user.score }}</p>
-      </div>
-    </section>
+      <section class="results">
+        <div>
+          <h3>
+            You have wasted <span>{{ user.total_hours }}</span> hours
+          </h3>
+          <p>Thats {{ user.total_hours / 24 }} days!</p>
+        </div>
+        <div>
+          <h2>{{ user.rating.title }}</h2>
+          <p>{{ user.rating.description }}</p>
+        </div>
+        <div>
+          <h3>Your Score</h3>
+          <p>{{ user.score }}</p>
+        </div>
+      </section>
 
-    <section class="csgo-stats">
-      <h2>Your CSGO stats</h2>
+      <section class="csgo-stats">
+        <h2>Your CSGO stats</h2>
 
-      <div class="main-stats">
-        <vc-donut
-          :sections="accuracyValues"
-          :background="donutSettings.background"
-          :thickness="donutSettings.thickness"
-          :size="donutSettings.size"
-          :total="user.csgo_stats.shots_fired + user.csgo_stats.shots_hit"
-        >
-          <div>
-            <h4>Accuracy:</h4>
-            <span class="accuracy">{{ user.csgo_stats.accuracy }}</span>
+        <div class="main-stats">
+          <vc-donut
+            :sections="accuracyValues"
+            :background="donutSettings.background"
+            :thickness="donutSettings.thickness"
+            :size="donutSettings.size"
+            :total="user.csgo_stats.shots_fired + user.csgo_stats.shots_hit"
+          >
+            <div>
+              <h4>Accuracy:</h4>
+              <span class="accuracy">{{ user.csgo_stats.accuracy }}</span>
+            </div>
+          </vc-donut>
+          <vc-donut
+            :sections="hoursValues"
+            :background="donutSettings.background"
+            :thickness="donutSettings.thickness"
+            :size="donutSettings.size"
+            :total="user.total_hours"
+          >
+            <div>
+              <h4>Hours:</h4>
+              <span class="hours">{{
+                (user.csgo_stats.hours / 60 / 24).toFixed()
+              }}</span>
+            </div>
+          </vc-donut>
+
+          <vc-donut
+            :sections="kdRatioValues"
+            :background="donutSettings.background"
+            :thickness="donutSettings.thickness"
+            :size="donutSettings.size"
+            :total="user.csgo_stats.total_kills + user.csgo_stats.total_deaths"
+          >
+            <div>
+              <h4>KD Ratio:</h4>
+              <span class="kd-ratio">{{ user.csgo_stats.kd_ratio }}</span>
+            </div>
+          </vc-donut>
+        </div>
+
+        <div class="graph">
+          <h3>Top 5 guns by kills</h3>
+          <gun-stats
+            :total_kills="user.csgo_stats.total_kills"
+            :gun_stats="user.csgo_stats.gun_stats"
+          ></gun-stats>
+        </div>
+
+        <div class="minor-stats">
+          <h3 class="minor-stats-title">Other Stats</h3>
+          <div class="row">
+            <div class="stat">
+              <h4>MVPs</h4>
+              <span>{{ user.csgo_stats.mvps }}</span>
+            </div>
+            <div class="stat">
+              <h4>Money earned</h4>
+              <span>${{ user.csgo_stats.money_earned }}</span>
+            </div>
+            <div class="stat">
+              <h4>Knife Kills</h4>
+              <span>{{ user.csgo_stats.knife_kills }}</span>
+            </div>
           </div>
-        </vc-donut>
-        <vc-donut
-          :sections="hoursValues"
-          :background="donutSettings.background"
-          :thickness="donutSettings.thickness"
-          :size="donutSettings.size"
-          :total="user.total_hours"
-        >
-          <div>
-            <h4>Hours:</h4>
-            <span class="hours">{{
-              (user.csgo_stats.hours / 60 / 24).toFixed()
-            }}</span>
-          </div>
-        </vc-donut>
-
-        <vc-donut
-          :sections="kdRatioValues"
-          :background="donutSettings.background"
-          :thickness="donutSettings.thickness"
-          :size="donutSettings.size"
-          :total="user.csgo_stats.total_kills + user.csgo_stats.total_deaths"
-        >
-          <div>
-            <h4>KD Ratio:</h4>
-            <span class="kd-ratio">{{ user.csgo_stats.kd_ratio }}</span>
-          </div>
-        </vc-donut>
-      </div>
-
-      <div class="graph">
-        <h3>Top 5 guns by kills</h3>
-        <gun-stats
-          :total_kills="user.csgo_stats.total_kills"
-          :gun_stats="user.csgo_stats.gun_stats"
-        ></gun-stats>
-      </div>
-
-      <div class="minor-stats">
-        <h3 class="minor-stats-title">Other Stats</h3>
-        <div class="row">
-          <div class="stat">
-            <h4>MVPs</h4>
-            <span>{{ user.csgo_stats.mvps }}</span>
-          </div>
-          <div class="stat">
-            <h4>Money earned</h4>
-            <span>${{ user.csgo_stats.money_earned }}</span>
-          </div>
-          <div class="stat">
-            <h4>Knife Kills</h4>
-            <span>{{ user.csgo_stats.knife_kills }}</span>
+          <div class="row">
+            <div class="stat">
+              <h4>Planted Bombs</h4>
+              <span>{{ user.csgo_stats.planted_bombs }}</span>
+            </div>
+            <div class="stat">
+              <h4>Rounds won</h4>
+              <span>{{ user.csgo_stats.total_wins }}</span>
+            </div>
+            <div class="stat">
+              <h4>Defused Bombs</h4>
+              <span>{{ user.csgo_stats.defused_bombs }}</span>
+            </div>
           </div>
         </div>
-        <div class="row">
-          <div class="stat">
-            <h4>Planted Bombs</h4>
-            <span>{{ user.csgo_stats.planted_bombs }}</span>
-          </div>
-          <div class="stat">
-            <h4>Rounds won</h4>
-            <span>{{ user.csgo_stats.total_wins }}</span>
-          </div>
-          <div class="stat">
-            <h4>Defused Bombs</h4>
-            <span>{{ user.csgo_stats.defused_bombs }}</span>
-          </div>
-        </div>
-      </div>
-    </section>
+      </section>
+    </div>
   </div>
 </template>
 <script>
 import axios from "axios";
 import GunStats from "../components/GunStats.vue";
+import SyncLoader from "vue-spinner/src/PulseLoader.vue";
+
 export default {
   components: {
     GunStats,
+    SyncLoader,
   },
   props: {
     user: Object,
@@ -148,6 +165,7 @@ export default {
           console.log("it did something");
           this.user = response.data;
           this.set_donut_charts_values(response.data);
+          this.loading = false;
         })
         .catch((error) => {
           console.log(error);
@@ -184,6 +202,27 @@ export default {
 };
 </script>
 <style lang="scss">
+.failed {
+  width: 800px;
+  position: absolute;
+  bottom: 500px;
+  color: #d64c4c;
+  text-align: center;
+  margin: 5px 20px 0 0;
+  h2 {
+    color: #d64c4c;
+    font-size: 46px;
+    margin-bottom: 50px;
+  }
+  h3 {
+    font-size: 24px;
+    color: #a4bdfe;
+  }
+}
+.loader {
+  margin-top: 50px;
+  text-align: center;
+}
 .steam-stats {
   padding-top: 80px;
   .user {
@@ -288,7 +327,7 @@ export default {
           width: 200px;
           text-align: center;
           h4 {
-            color: #78e5b1;
+            color: #73d0ee;
             margin-bottom: 10px;
           }
           span {
