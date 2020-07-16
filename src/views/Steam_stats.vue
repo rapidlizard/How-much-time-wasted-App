@@ -70,6 +70,14 @@
         </vc-donut>
       </div>
 
+      <div class="graph">
+        <h3>Top 5 guns by kills</h3>
+        <gun-stats
+          :total_kills="user.csgo_stats.total_kills"
+          :gun_stats="user.csgo_stats.gun_stats"
+        ></gun-stats>
+      </div>
+
       <div class="minor-stats">
         <div class="row">
           <div class="stat">
@@ -101,17 +109,15 @@
         </div>
       </div>
     </section>
-
-    <section>
-      <apexchart width="800" type="bar" :options="options" :series="series">
-      </apexchart>
-    </section>
   </div>
 </template>
 <script>
 import axios from "axios";
-
+import GunStats from "../components/GunStats.vue";
 export default {
+  components: {
+    GunStats,
+  },
   data() {
     return {
       loading: true,
@@ -124,32 +130,6 @@ export default {
       kdRatioValues: [],
       accuracyValues: [],
       hoursValues: [],
-      options: {
-        chart: {
-          id: "gun-stats",
-        },
-        xaxis: {
-          categories: [
-            "Jan",
-            "Feb",
-            "Mar",
-            "Apr",
-            "May",
-            "Jun",
-            "Jul",
-            "Aug",
-            "Sep",
-            "Oct",
-            "Nov",
-            "Dec",
-          ],
-        },
-      },
-      series: [
-        {
-          data: [55, 62, 89, 66, 98, 72, 101, 75, 94, 120, 117, 139],
-        },
-      ],
     };
   },
   methods: {
@@ -247,7 +227,7 @@ export default {
     .main-stats {
       display: flex;
       justify-content: space-between;
-      margin-bottom: 50px;
+      margin-bottom: 100px;
       div {
         text-align: center;
         h4 {
@@ -266,6 +246,13 @@ export default {
       }
       .kd-ratio {
         color: #7dd23a;
+      }
+    }
+    .graph {
+      margin-bottom: 100px;
+      h3 {
+        text-align: center;
+        margin-bottom: 20px;
       }
     }
     .minor-stats {
