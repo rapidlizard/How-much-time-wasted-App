@@ -133,7 +133,7 @@
               <span>{{ user.csgo_stats.defused_bombs }}</span>
             </div>
           </div>
-          <div class="row">
+          <div class="last-row">
             <div class="stat">
               <h4>Dominations</h4>
               <span>{{ user.csgo_stats.dominations }}</span>
@@ -343,7 +343,23 @@ export default {
       }
       .row {
         display: flex;
-        justify-content: space-around;
+        justify-content: space-between;
+        margin-bottom: 50px;
+        .stat {
+          width: 200px;
+          text-align: center;
+          h4 {
+            color: #73d0ee;
+            margin-bottom: 10px;
+          }
+          span {
+            color: #a4bdfe;
+          }
+        }
+      }
+      .last-row {
+        display: flex;
+        justify-content: space-evenly;
         margin-bottom: 50px;
         .stat {
           width: 200px;
