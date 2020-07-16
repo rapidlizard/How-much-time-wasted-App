@@ -105,7 +105,9 @@ export default {
   }
 }
 .site-description {
-  padding-top: 200px;
+  position: absolute;
+  bottom: 200px;
+  width: 800px;
   text-align: center;
   h3 {
     margin-bottom: 10px;
