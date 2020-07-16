@@ -1,6 +1,8 @@
 <template>
   <div id="app">
-    <h1>HowMuchTimeHaveIWasted.com</h1>
+    <div class="home-logo">
+      <a href="/"><h1>HowMuchTimeHaveIWasted.com</h1></a>
+    </div>
     <router-view />
   </div>
 </template>
@@ -78,5 +80,10 @@ p {
   line-height: 26px;
   letter-spacing: 0.05em;
   color: #a4bdfe;
+}
+.home-logo {
+  a {
+    text-decoration: none;
+  }
 }
 </style>
