@@ -1,8 +1,8 @@
 <template>
   <div id="app">
-    <div class="home-logo">
+    <header class="home-logo">
       <a href="/"><h1>HowMuchTimeHaveIWasted.com</h1></a>
-    </div>
+    </header>
     <router-view />
   </div>
 </template>

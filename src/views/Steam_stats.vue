@@ -148,6 +148,13 @@
         </div>
       </section>
     </div>
+    <footer>
+      <h4>You can find the source code here:</h4>
+      <div>
+        <a href="">App</a>
+        <a href="">Api</a>
+      </div>
+    </footer>
   </div>
 </template>
 <script>
@@ -249,6 +256,7 @@ export default {
 }
 .steam-stats {
   padding-top: 80px;
+  margin-bottom: 150px;
   .user {
     display: flex;
     justify-content: center;
@@ -375,6 +383,24 @@ export default {
           }
         }
       }
+    }
+  }
+}
+footer {
+  text-align: center;
+  border-top: 3px solid #78e5b1;
+  padding: 50px 0;
+  h4 {
+    margin-bottom: 20px;
+  }
+  div {
+    margin: 0 auto;
+    max-width: 100px;
+    display: flex;
+    justify-content: space-between;
+    a {
+      text-align: center;
+      color: #a4bdfe;
     }
   }
 }
