@@ -63,7 +63,9 @@
           >
             <div>
               <h4>Headshots:</h4>
-              <span class="hours">{{ user.csgo_stats.headshots }}</span>
+              <span class="hours">{{
+                user.csgo_stats.headshot_percentage
+              }}</span>
             </div>
           </vc-donut>
 
