@@ -4,7 +4,7 @@
       <img :src="user.img" alt="" />
       <div class="user-info">
         <a :href="user.url">{{ user.name }}</a>
-        <p>{{ moment(user.created * 1000).toNow(true) }} old</p>
+        <p>Joined steam in {{ moment(user.created * 1000).format("Y") }}</p>
       </div>
     </section>
 
@@ -196,6 +196,7 @@ export default {
         color: #a4bdfe;
       }
       p {
+        padding-top: 5px;
         font-size: 18px;
         color: #a4bdfe;
       }
