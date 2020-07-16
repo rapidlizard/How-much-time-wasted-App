@@ -79,31 +79,32 @@
       </div>
 
       <div class="minor-stats">
+        <h3 class="minor-stats-title">Other Stats</h3>
         <div class="row">
           <div class="stat">
-            <h3>MVPs</h3>
+            <h4>MVPs</h4>
             <span>{{ user.csgo_stats.mvps }}</span>
           </div>
           <div class="stat">
-            <h3>Money earned</h3>
+            <h4>Money earned</h4>
             <span>${{ user.csgo_stats.money_earned }}</span>
           </div>
           <div class="stat">
-            <h3>Knife Kills</h3>
+            <h4>Knife Kills</h4>
             <span>{{ user.csgo_stats.knife_kills }}</span>
           </div>
         </div>
         <div class="row">
           <div class="stat">
-            <h3>Planted Bombs</h3>
+            <h4>Planted Bombs</h4>
             <span>{{ user.csgo_stats.planted_bombs }}</span>
           </div>
           <div class="stat">
-            <h3>Rounds won</h3>
+            <h4>Rounds won</h4>
             <span>{{ user.csgo_stats.total_wins }}</span>
           </div>
           <div class="stat">
-            <h3>Defused Bombs</h3>
+            <h4>Defused Bombs</h4>
             <span>{{ user.csgo_stats.defused_bombs }}</span>
           </div>
         </div>
@@ -251,11 +252,19 @@ export default {
     .graph {
       margin-bottom: 100px;
       h3 {
+        font-size: 28px;
+        font-weight: 300;
         text-align: center;
         margin-bottom: 20px;
       }
     }
     .minor-stats {
+      h3 {
+        font-size: 28px;
+        font-weight: 300;
+        text-align: center;
+        margin-bottom: 50px;
+      }
       .row {
         display: flex;
         justify-content: space-between;
@@ -263,7 +272,8 @@ export default {
         .stat {
           width: 200px;
           text-align: center;
-          h3 {
+          h4 {
+            color: #78e5b1;
             margin-bottom: 10px;
           }
           span {
