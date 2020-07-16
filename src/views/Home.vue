@@ -8,8 +8,15 @@
           <button @click="get_user()">GO!</button>
         </form>
       </div>
+      <sync-loader
+        :loading="loading"
+        color="#78e5b1"
+        size="10px"
+        class="loader"
+      ></sync-loader>
       <label v-if="failed == true" class="failed">There was a problem :(</label>
     </div>
+
     <div class="site-description">
       <h3>What does this do?</h3>
       <p>
@@ -23,9 +30,15 @@
 
 <script>
 import axios from "axios";
+import SyncLoader from "vue-spinner/src/PulseLoader.vue";
+
 export default {
+  components: {
+    SyncLoader,
+  },
   data() {
     return {
+      loading: false,
       failed: false,
       steamid: "",
       user: {},
@@ -33,6 +46,7 @@ export default {
   },
   methods: {
     get_user() {
+      this.loading = true;
       axios
         .get("http://127.0.0.1:5000/howmuchtimehaveiwasted/" + this.steamid)
         .then((response) => {
@@ -42,6 +56,7 @@ export default {
         .catch((error) => {
           console.log(error);
           this.failed = true;
+          this.loading = false;
         });
     },
     go_to_user_steam_stats() {
@@ -73,6 +88,10 @@ export default {
     text-align: right;
     font-size: 16px;
     margin: 5px 20px 0 0;
+  }
+  .loader {
+    margin-top: 50px;
+    text-align: center;
   }
   .input-bar {
     position: relative;
