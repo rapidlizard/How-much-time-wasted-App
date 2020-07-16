@@ -6,6 +6,7 @@
         <input type="text" v-model="steamid" />
         <button @click="get_user()">GO!</button>
       </div>
+      <label v-if="failed == true" class="failed">There was a problem :(</label>
     </div>
     <div class="site-description">
       <h3>What does this do?</h3>
@@ -23,6 +24,7 @@ import axios from "axios";
 export default {
   data() {
     return {
+      failed: false,
       steamid: "",
       user: {},
     };
@@ -34,6 +36,10 @@ export default {
         .then((response) => {
           this.user = response.data;
           this.go_to_user_steam_stats();
+        })
+        .catch((error) => {
+          console.log(error);
+          this.failed = true;
         });
     },
     go_to_user_steam_stats() {
@@ -59,6 +65,12 @@ export default {
     line-height: 21px;
     color: #78e5b1;
     margin-bottom: 10px;
+  }
+  .failed {
+    color: #d64c4c;
+    text-align: right;
+    font-size: 16px;
+    margin: 5px 20px 0 0;
   }
   .input-bar {
     position: relative;
