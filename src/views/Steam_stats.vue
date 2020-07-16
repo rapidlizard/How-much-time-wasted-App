@@ -147,14 +147,18 @@
           </div>
         </div>
       </section>
+      <footer>
+        <h4>You can find the source code here:</h4>
+        <div>
+          <a href="https://github.com/rapidlizard/How-much-time-wasted-App"
+            >App</a
+          >
+          <a href="https://github.com/rapidlizard/How-much-time-wasted-Api"
+            >Api</a
+          >
+        </div>
+      </footer>
     </div>
-    <footer>
-      <h4>You can find the source code here:</h4>
-      <div>
-        <a href="">App</a>
-        <a href="">Api</a>
-      </div>
-    </footer>
   </div>
 </template>
 <script>
@@ -256,7 +260,6 @@ export default {
 }
 .steam-stats {
   padding-top: 80px;
-  margin-bottom: 150px;
   .user {
     display: flex;
     justify-content: center;
@@ -306,7 +309,7 @@ export default {
   }
   .csgo-stats {
     padding-top: 20px;
-    margin-bottom: 50px;
+    margin-bottom: 150px;
     h2 {
       text-align: center;
       margin-bottom: 50px;
