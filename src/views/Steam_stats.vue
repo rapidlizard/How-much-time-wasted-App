@@ -101,6 +101,11 @@
         </div>
       </div>
     </section>
+
+    <section>
+      <apexchart width="800" type="bar" :options="options" :series="series">
+      </apexchart>
+    </section>
   </div>
 </template>
 <script>
@@ -119,6 +124,32 @@ export default {
       kdRatioValues: [],
       accuracyValues: [],
       hoursValues: [],
+      options: {
+        chart: {
+          id: "gun-stats",
+        },
+        xaxis: {
+          categories: [
+            "Jan",
+            "Feb",
+            "Mar",
+            "Apr",
+            "May",
+            "Jun",
+            "Jul",
+            "Aug",
+            "Sep",
+            "Oct",
+            "Nov",
+            "Dec",
+          ],
+        },
+      },
+      series: [
+        {
+          data: [55, 62, 89, 66, 98, 72, 101, 75, 94, 120, 117, 139],
+        },
+      ],
     };
   },
   methods: {
