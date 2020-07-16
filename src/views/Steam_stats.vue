@@ -97,12 +97,26 @@
               <span>{{ user.csgo_stats.mvps }}</span>
             </div>
             <div class="stat">
+              <h4>Hours played</h4>
+              <span>{{ user.csgo_stats.hours }}</span>
+            </div>
+            <div class="stat">
+              <h4>Money earned</h4>
+              <span>${{ user.csgo_stats.money_earned }}</span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="stat">
+              <h4>Knife kills</h4>
+              <span>{{ user.csgo_stats.knife_kills }}</span>
+            </div>
+            <div class="stat">
               <h4>Money earned</h4>
               <span>${{ user.csgo_stats.money_earned }}</span>
             </div>
             <div class="stat">
-              <h4>Knife Kills</h4>
-              <span>{{ user.csgo_stats.knife_kills }}</span>
+              <h4>Rounds won</h4>
+              <span>{{ user.csgo_stats.total_wins }}</span>
             </div>
           </div>
           <div class="row">
@@ -111,12 +125,22 @@
               <span>{{ user.csgo_stats.planted_bombs }}</span>
             </div>
             <div class="stat">
-              <h4>Rounds won</h4>
-              <span>{{ user.csgo_stats.total_wins }}</span>
+              <h4>Rescued hostages</h4>
+              <span>{{ user.csgo_stats.rescued_hostages }}</span>
             </div>
             <div class="stat">
               <h4>Defused Bombs</h4>
               <span>{{ user.csgo_stats.defused_bombs }}</span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="stat">
+              <h4>Dominations</h4>
+              <span>{{ user.csgo_stats.dominations }}</span>
+            </div>
+            <div class="stat">
+              <h4>Revenges</h4>
+              <span>{{ user.csgo_stats.revenges }}</span>
             </div>
           </div>
         </div>
@@ -319,7 +343,7 @@ export default {
       }
       .row {
         display: flex;
-        justify-content: space-between;
+        justify-content: space-around;
         margin-bottom: 50px;
         .stat {
           width: 200px;
