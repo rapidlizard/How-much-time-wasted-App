@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="failed" class="failed">
+    <div v-if="failed" class="not-found">
       <h2>404</h2>
       <h3>This user was not found :(</h3>
     </div>
@@ -202,7 +202,7 @@ export default {
 };
 </script>
 <style lang="scss">
-.failed {
+.not-found {
   width: 800px;
   position: absolute;
   bottom: 500px;
