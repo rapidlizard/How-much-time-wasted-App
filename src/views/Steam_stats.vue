@@ -1,5 +1,5 @@
 <template>
-  <div class="steam-stats" v-if="!loading">
+  <div class="steam-stats">
     <section class="user">
       <img :src="user.img" alt="" />
       <div class="user-info">
@@ -113,39 +113,28 @@
   </div>
 </template>
 <script>
-import axios from "axios";
 import GunStats from "../components/GunStats.vue";
 export default {
   components: {
     GunStats,
   },
+  props: {
+    user: Object,
+  },
   data() {
     return {
-      loading: true,
       donutSettings: {
         background: "#171c24",
         thickness: 10,
         size: 200,
       },
-      user: {},
+
       kdRatioValues: [],
       accuracyValues: [],
       hoursValues: [],
     };
   },
   methods: {
-    get_user() {
-      axios
-        .get(
-          "http://127.0.0.1:5000/howmuchtimehaveiwasted/" +
-            this.$route.params.steamid
-        )
-        .then((response) => {
-          this.loading = false;
-          this.set_donut_charts_values(response.data);
-          this.user = response.data;
-        });
-    },
     set_donut_charts_values(user) {
       this.kdRatioValues = [
         { value: user.csgo_stats.total_deaths, color: "#7DD23A" },
@@ -165,7 +154,7 @@ export default {
     },
   },
   mounted() {
-    this.get_user();
+    this.set_donut_charts_values(this.user);
   },
 };
 </script>

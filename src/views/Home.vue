@@ -4,7 +4,7 @@
       <label>Enter your steam id:</label>
       <div class="input-bar">
         <input type="text" v-model="steamid" />
-        <button @click="go_to_user_steam_stats()">GO!</button>
+        <button @click="get_user()">GO!</button>
       </div>
     </div>
     <div class="site-description">
@@ -19,17 +19,27 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   data() {
     return {
       steamid: "",
+      user: {},
     };
   },
   methods: {
+    get_user() {
+      axios
+        .get("http://127.0.0.1:5000/howmuchtimehaveiwasted/" + this.steamid)
+        .then((response) => {
+          this.user = response.data;
+          this.go_to_user_steam_stats();
+        });
+    },
     go_to_user_steam_stats() {
       this.$router.push({
         name: "Steam_stats",
-        params: { steamid: this.steamid },
+        params: { steamid: this.steamid, user: this.user },
       });
     },
   },

@@ -15,6 +15,7 @@ const routes = [
     path: "/:steamid",
     name: "Steam_stats",
     component: Steam_stats,
+    props: true,
   },
 ];
 
