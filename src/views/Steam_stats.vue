@@ -174,7 +174,7 @@ export default {
   .user {
     display: flex;
     justify-content: center;
-    margin-bottom: 60px;
+    margin-bottom: 100px;
 
     img {
       width: 100px;
@@ -202,7 +202,7 @@ export default {
   }
   .results {
     text-align: center;
-    margin-bottom: 80px;
+    margin-bottom: 100px;
     h2 {
       margin-bottom: 10px;
       color: #73d0ee;

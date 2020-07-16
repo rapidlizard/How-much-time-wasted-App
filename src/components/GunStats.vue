@@ -18,12 +18,23 @@ export default {
         chart: {
           id: "gun-stats",
           foreColor: "#a4bdfe",
+          fontFamily: "Raleway, sans-serif",
         },
         xaxis: {
           categories: [],
+          labels: {
+            style: {
+              fontSize: "16px",
+            },
+          },
         },
         yaxis: {
           max: null,
+          labels: {
+            style: {
+              fontSize: "16px",
+            },
+          },
         },
         plotOptions: {
           bar: {
