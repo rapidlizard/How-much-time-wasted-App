@@ -113,6 +113,7 @@
   </div>
 </template>
 <script>
+import axios from "axios";
 import GunStats from "../components/GunStats.vue";
 export default {
   components: {
@@ -128,13 +129,32 @@ export default {
         thickness: 10,
         size: 200,
       },
-
+      loading: false,
+      failed: false,
       kdRatioValues: [],
       accuracyValues: [],
       hoursValues: [],
     };
   },
   methods: {
+    get_user() {
+      this.loading = true;
+      axios
+        .get(
+          "http://127.0.0.1:5000/howmuchtimehaveiwasted/" +
+            this.$route.params.steamid
+        )
+        .then((response) => {
+          console.log("it did something");
+          this.user = response.data;
+          this.set_donut_charts_values(response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+          this.failed = true;
+          this.loading = false;
+        });
+    },
     set_donut_charts_values(user) {
       this.kdRatioValues = [
         { value: user.csgo_stats.total_deaths, color: "#7DD23A" },
@@ -154,7 +174,12 @@ export default {
     },
   },
   mounted() {
-    this.set_donut_charts_values(this.user);
+    if (!this.user) {
+      this.get_user();
+    }
+    if (this.user) {
+      this.set_donut_charts_values(this.user);
+    }
   },
 };
 </script>

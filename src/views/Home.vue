@@ -8,13 +8,13 @@
           <button @click="get_user()">GO!</button>
         </form>
       </div>
+      <label v-if="failed == true" class="failed">There was a problem :(</label>
       <sync-loader
         :loading="loading"
         color="#78e5b1"
         size="10px"
         class="loader"
       ></sync-loader>
-      <label v-if="failed == true" class="failed">There was a problem :(</label>
     </div>
 
     <div class="site-description">
