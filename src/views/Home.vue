@@ -8,7 +8,9 @@
           <button @click="get_user()">GO!</button>
         </form>
       </div>
-      <label v-if="failed == true" class="failed">There was a problem :(</label>
+      <label v-if="failed == true" class="failed"
+        >There was a problem finding that user</label
+      >
       <sync-loader
         :loading="loading"
         color="#78e5b1"
@@ -47,6 +49,7 @@ export default {
   methods: {
     get_user() {
       this.loading = true;
+      this.failed = false;
       axios
         .get("http://127.0.0.1:5000/howmuchtimehaveiwasted/" + this.steamid)
         .then((response) => {
@@ -105,9 +108,10 @@ export default {
       background: #171c24;
       border: 3px solid #78e5b1;
       border-radius: 0px 10px 10px 10px;
-
+      transition: 0.2s;
       &:focus {
         outline: none;
+        background: #2d3646;
       }
     }
     button {
@@ -120,6 +124,13 @@ export default {
       background: #78e5b1;
       border: none;
       border-radius: 10px 10px 0px 10px;
+      &:focus {
+        outline: none;
+      }
+      &:hover {
+        background: #a3ffd3;
+        font-weight: 600;
+      }
     }
   }
 }
