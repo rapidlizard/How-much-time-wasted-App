@@ -26,7 +26,7 @@
           <h3>
             You have wasted <span>{{ user.total_hours }}</span> hours
           </h3>
-          <p>Thats {{ user.total_hours / 24 }} days!</p>
+          <p>Thats {{ user.total_days }} days!</p>
         </div>
         <div>
           <h2>{{ user.rating.title }}</h2>
