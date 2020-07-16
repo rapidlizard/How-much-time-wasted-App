@@ -16,8 +16,8 @@
       <section class="user">
         <img :src="user.img" alt="" />
         <div class="user-info">
-          <a :href="user.url">{{ user.name }}</a>
-          <p>Joined steam in {{ moment(user.created * 1000).format("Y") }}</p>
+          <a :href="user.url" target="_blank">{{ user.name }}</a>
+          <p>Joined Steam in {{ moment(user.created * 1000).format("Y") }}</p>
         </div>
       </section>
 
@@ -150,10 +150,14 @@
       <footer>
         <h4>You can find the source code here:</h4>
         <div>
-          <a href="https://github.com/rapidlizard/How-much-time-wasted-App"
+          <a
+            href="https://github.com/rapidlizard/How-much-time-wasted-App"
+            target="_blank"
             >App</a
           >
-          <a href="https://github.com/rapidlizard/How-much-time-wasted-Api"
+          <a
+            href="https://github.com/rapidlizard/How-much-time-wasted-Api"
+            target="_blank"
             >Api</a
           >
         </div>
