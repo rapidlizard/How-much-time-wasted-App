@@ -73,7 +73,7 @@ export default {
   display: block;
   width: 370px;
   margin: 0 auto;
-  padding-top: 150px;
+  padding-top: 200px;
   label {
     display: block;
     font-style: normal;
@@ -125,7 +125,7 @@ export default {
 }
 .site-description {
   position: absolute;
-  bottom: 200px;
+  bottom: 150px;
   width: 800px;
   text-align: center;
   h3 {
