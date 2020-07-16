@@ -113,8 +113,8 @@
               <span>{{ user.csgo_stats.knife_kills }}</span>
             </div>
             <div class="stat">
-              <h4>Money earned</h4>
-              <span>${{ user.csgo_stats.money_earned }}</span>
+              <h4>Weapons donated</h4>
+              <span>{{ user.csgo_stats.weapons_donated }}</span>
             </div>
             <div class="stat">
               <h4>Rounds won</h4>

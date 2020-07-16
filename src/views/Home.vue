@@ -42,12 +42,16 @@ export default {
     return {
       loading: false,
       failed: false,
-      steamid: "",
+      steamid: null,
       user: {},
     };
   },
   methods: {
     get_user() {
+      if (this.steamid == null || this.steamid == "") {
+        this.failed = true;
+        return;
+      }
       this.loading = true;
       this.failed = false;
       axios
