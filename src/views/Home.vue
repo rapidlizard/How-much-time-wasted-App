@@ -3,8 +3,10 @@
     <div class="steamid-form">
       <label>Enter your steam id:</label>
       <div class="input-bar">
-        <input type="text" v-model="steamid" />
-        <button @click="get_user()">GO!</button>
+        <form @submit.prevent>
+          <input type="text" v-model="steamid" />
+          <button @click="get_user()">GO!</button>
+        </form>
       </div>
       <label v-if="failed == true" class="failed">There was a problem :(</label>
     </div>
