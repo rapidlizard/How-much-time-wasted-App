@@ -51,7 +51,7 @@
           >
             <div>
               <h4>Accuracy:</h4>
-              <span class="accuracy">{{ user.csgo_stats.accuracy }}</span>
+              <span class="accuracy">{{ user.csgo_stats.accuracy }}%</span>
             </div>
           </vc-donut>
           <vc-donut
@@ -63,9 +63,9 @@
           >
             <div>
               <h4>Headshots:</h4>
-              <span class="hours">{{
-                user.csgo_stats.headshot_percentage
-              }}</span>
+              <span class="hours"
+                >{{ user.csgo_stats.headshot_percentage }}%</span
+              >
             </div>
           </vc-donut>
 
