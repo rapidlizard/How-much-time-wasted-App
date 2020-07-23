@@ -4,19 +4,12 @@
       <label>Enter your steam id:</label>
       <div class="input-bar">
         <form @submit.prevent>
-          <input type="text" v-model="steamid" />
+          <input type="text" v-model="steamid" placeholder="E.g.,76561198066000502" />
           <button @click="get_user()">GO!</button>
         </form>
       </div>
-      <label v-if="failed == true" class="failed"
-        >There was a problem finding that user</label
-      >
-      <sync-loader
-        :loading="loading"
-        color="#78e5b1"
-        size="10px"
-        class="loader"
-      ></sync-loader>
+      <label v-if="failed == true" class="failed">There was a problem finding that user</label>
+      <sync-loader :loading="loading" color="#78e5b1" size="10px" class="loader"></sync-loader>
     </div>
 
     <div class="site-description">
@@ -36,14 +29,14 @@ import SyncLoader from "vue-spinner/src/PulseLoader.vue";
 
 export default {
   components: {
-    SyncLoader,
+    SyncLoader
   },
   data() {
     return {
       loading: false,
       failed: false,
       steamid: null,
-      user: {},
+      user: {}
     };
   },
   methods: {
@@ -56,11 +49,11 @@ export default {
       this.failed = false;
       axios
         .get("http://127.0.0.1:5000/howmuchtimehaveiwasted/" + this.steamid)
-        .then((response) => {
+        .then(response => {
           this.user = response.data;
           this.go_to_user_steam_stats();
         })
-        .catch((error) => {
+        .catch(error => {
           console.log(error);
           this.failed = true;
           this.loading = false;
@@ -69,10 +62,10 @@ export default {
     go_to_user_steam_stats() {
       this.$router.push({
         name: "Steam_stats",
-        params: { steamid: this.steamid, user: this.user },
+        params: { steamid: this.steamid, user: this.user }
       });
-    },
-  },
+    }
+  }
 };
 </script>
 <style lang="scss">
